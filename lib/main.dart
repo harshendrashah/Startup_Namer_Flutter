@@ -8,15 +8,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Startup Name Generator',
+      theme: new ThemeData(
+        primaryColor: Colors.limeAccent,
+      ),
       home: RandomWords(),
     );
   }
 }
 
 class RandomWordsState extends State<RandomWords> {
+  
   final _suggestions = <WordPair>[];
   final Set<WordPair> _saved = new Set<WordPair>(); 
   final _biggerFont = const TextStyle(fontSize: 18.0);
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +34,7 @@ class RandomWordsState extends State<RandomWords> {
       body: _buildSuggestions(),
     );
   }
+
   Widget _buildSuggestions() {
     return ListView.builder(
       padding: const EdgeInsets.all(16.0),
@@ -42,6 +48,7 @@ class RandomWordsState extends State<RandomWords> {
         return _buildRow(_suggestions[index]);
       });
   }
+
   Widget _buildRow(WordPair pair) {
     final bool alreadySaved = _saved.contains(pair);
     return ListTile(
@@ -64,6 +71,7 @@ class RandomWordsState extends State<RandomWords> {
       },   
     );
   }
+
   void _pushSaved() {
     Navigator.of(context).push(
       new MaterialPageRoute<void>(
